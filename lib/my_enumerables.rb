@@ -55,7 +55,26 @@ module Enumerable
     end
     true
   end
-  
+
+  def my_count(item = nil)
+    return self.size unless block_given? || !item.nil?
+
+    count = 0
+    i = 0
+
+    if item.nil?
+      while i < self.length
+        count += 1 if yield(self[i])  # If a block is given, count based on block condition
+        i += 1
+      end
+    else
+      while i < self.length
+        count += 1 if self[i] == item  # Count occurrences of the item
+        i += 1
+      end
+    end
+    count
+  end
 end
 
 # You will first have to define my_each
