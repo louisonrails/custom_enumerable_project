@@ -75,6 +75,18 @@ module Enumerable
     end
     count
   end
+
+  def my_map
+    return to_enum(:my_map) unless block_given?
+
+    result = []
+    i = 0
+    while i < self.length
+      result << yield(self[i])
+      i += 1
+    end
+    result
+  end
 end
 
 # You will first have to define my_each
