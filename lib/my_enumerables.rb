@@ -18,6 +18,16 @@ module Enumerable
     end
     result
   end
+
+  def my_all?
+    i = 0
+    while i < self.length
+      return false unless yield(self[i])
+      i += 1
+    end
+    true
+  end
+  
 end
 
 # You will first have to define my_each
