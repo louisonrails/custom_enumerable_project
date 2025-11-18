@@ -44,6 +44,18 @@ module Enumerable
     end
     false
   end
+  
+  def my_none?
+    return to_enum(:my_none?) unless block_given?
+
+    i = 0
+    while i < self.length
+      return false if yield(self[i])
+      i += 1
+    end
+    true
+  end
+  
 end
 
 # You will first have to define my_each
@@ -54,7 +66,7 @@ class Array
   # Define my_each here
   def my_each
     return to_enum(:my_each) unless block_given?
-    
+
     i = 0
     while i < self.length
       yield(self[i])
