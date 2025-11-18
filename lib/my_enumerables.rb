@@ -1,6 +1,8 @@
 module Enumerable
   # Your code goes here
   def my_each_with_index
+    return to_enum(:my_each_with_index) unless block_given?
+
     i = 0
     while i < self.length
       yield(self[i], i)
@@ -10,6 +12,8 @@ module Enumerable
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
+
     result = []
     i = 0
     while i < self.length
@@ -20,6 +24,8 @@ module Enumerable
   end
 
   def my_all?
+    return to_enum(:my_all?) unless block_given?
+
     i = 0
     while i < self.length
       return false unless yield(self[i])
@@ -28,6 +34,16 @@ module Enumerable
     true
   end
   
+  def my_any?
+    return to_enum(:my_any?) unless block_given?
+
+    i = 0
+    while i < self.length
+      return true if yield(self[i])
+      i += 1
+    end
+    false
+  end
 end
 
 # You will first have to define my_each
@@ -37,6 +53,8 @@ end
 class Array
   # Define my_each here
   def my_each
+    return to_enum(:my_each) unless block_given?
+    
     i = 0
     while i < self.length
       yield(self[i])
